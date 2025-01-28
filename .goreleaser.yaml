@@ -3,11 +3,11 @@
 before:
   hooks:
     - sudo apt-get update && sudo apt-get install -y gcc linux-headers-$(uname -r)
-  #   - wget https://github.com/CosmWasm/wasmvm/releases/download/{{ .Env.WASMVM_VERSION }}/libwasmvm_muslc.x86_64.a -O /tmp/libwasmvm_muslc.a
-  #   - mkdir -p /tmp/lib/
-  #   - mv /tmp/libwasmvm_muslc.a /tmp/lib/libwasmvm_muslc.a
-  #   - export LIBRARY_PATH=/tmp/lib:$LIBRARY_PATH
-  #   - export LD_LIBRARY_PATH=/tmp/lib:$LD_LIBRARY_PATH
+    - wget https://github.com/CosmWasm/wasmvm/releases/download/{{ .Env.WASMVM_VERSION }}/libwasmvm_muslc.x86_64.a -O /tmp/libwasmvm_muslc.a
+    - mkdir -p /tmp/lib/
+    - mv /tmp/libwasmvm_muslc.a /tmp/lib/libwasmvm_muslc.a
+    - export LIBRARY_PATH=/tmp/lib:$LIBRARY_PATH
+    - export LD_LIBRARY_PATH=/tmp/lib:$LD_LIBRARY_PATH
 env:
   - CGO_ENABLED=1
 
@@ -32,7 +32,7 @@ builds:
       - linux
     goarch:
       - amd64
-    buildmode: c-archive
+    # buildmode: c-archive
 
 
 archives:
