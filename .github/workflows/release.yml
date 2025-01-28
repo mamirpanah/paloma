@@ -25,9 +25,17 @@ jobs:
           go-version: '1.23.5'
       - name: Unshallow
         run: git fetch --prune --unshallow
+      - name: Extract WASMVM version
+        id: extract-wasmvm-version
+        run: |
+          WASMVM_VERSION=$(grep 'github.com/CosmWasm/wasmvm' go.mod | awk '{print $2}')
+          echo "WASMVM_VERSION=$WASMVM_VERSION" >> $GITHUB_ENV
+      - name: Print WASMVM version
+        run: echo "Extracted WASMVM version: $WASMVM_VERSION"
       - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
           args: release --snapshot --clean --release-notes ./RELEASE_NOTES.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WASMVM_VERSION: ${{ env.WASMVM_VERSION }} # Pass the env variable to the next step
