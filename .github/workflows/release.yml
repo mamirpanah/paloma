@@ -33,11 +33,12 @@ jobs:
           echo "WASMVM_VERSION=$WASMVM_VERSION" >> $GITHUB_ENV
           echo "COMETBFT_VERSION=$COMETBFT_VERSION" >> $GITHUB_ENV
       - name: Print WASMVM version
-        run: 'echo "Extracted WASMVM version: $WASMVM_VERSION"'
+        run: 'echo "Extracted WASMVM version: $COMETBFT_VERSION"'
       - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
-          args: release --clean --release-notes ./RELEASE_NOTES.md
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WASMVM_VERSION: ${{ env.WASMVM_VERSION }} # Pass the env variable to the next step
+          WASMVM_VERSION: ${{ env.WASMVM_VERSION }}
+          COMETBFT_VERSION: ${{ env.COMETBFT_VERSION }}
