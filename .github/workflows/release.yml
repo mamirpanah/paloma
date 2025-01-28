@@ -31,7 +31,7 @@ jobs:
           WASMVM_VERSION=$(grep 'github.com/CosmWasm/wasmvm' go.mod | awk '{print $2}')
           echo "WASMVM_VERSION=$WASMVM_VERSION" >> $GITHUB_ENV
       - name: Print WASMVM version
-        run: echo "Extracted WASMVM version: $WASMVM_VERSION"
+        run: 'echo "Extracted WASMVM version: $WASMVM_VERSION"'
       - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
