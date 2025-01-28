@@ -2,7 +2,7 @@
 # Make sure to check the documentation at https://goreleaser.com
 before:
   hooks:
-    - apt-get update && apt-get install -y gcc linux-headers-$(uname -r)
+    - apt-get install -y gcc linux-headers-$(uname -r)
   #   - wget https://github.com/CosmWasm/wasmvm/releases/download/{{ .Env.WASMVM_VERSION }}/libwasmvm_muslc.x86_64.a -O /tmp/libwasmvm_muslc.a
   #   - mkdir -p /tmp/lib/
   #   - mv /tmp/libwasmvm_muslc.a /tmp/lib/libwasmvm_muslc.a
