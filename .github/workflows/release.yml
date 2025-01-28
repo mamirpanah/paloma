@@ -28,6 +28,6 @@ jobs:
       - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
-          args: release --rm-dist --release-notes ./RELEASE_NOTES.md
+          args: release --snapshot --clean --release-notes ./RELEASE_NOTES.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
