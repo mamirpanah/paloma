@@ -7,7 +7,7 @@ before:
     # - sudo apt-get update && sudo apt-get install -y gcc musl musl-tools
 env:
   - CGO_ENABLED=1
-  - CC=musl-gcc
+  # - CC=musl-gcc
 
 builds:
   - main: ./cmd/palomad
@@ -16,6 +16,9 @@ builds:
       - netgo
       - gcc
       - ledger
+    flags:
+      - -mod=readonly
+      - -trimpath
     ldflags:
       - -s -w
       - -X github.com/cosmos/cosmos-sdk/version.Name=paloma
