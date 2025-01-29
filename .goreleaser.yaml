@@ -6,7 +6,7 @@ before:
 
 env:
   - CGO_ENABLED=1
-  # - CC=musl-gcc
+  - CC=musl-gcc
 
 builds:
   - main: ./cmd/palomad
