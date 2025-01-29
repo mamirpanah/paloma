@@ -24,7 +24,7 @@ builds:
       - -X github.com/cosmos/cosmos-sdk/version.BuildTags=netgo
       - -X github.com/cometbft/cometbft/version.TMCoreSemVer={{ .Env.COMETBFT_VERSION }}
       - -linkmode=external
-      - -extldflags '-Wl,-z,muldefs --static -lm'
+      - -extldflags '--static -lm'
     goos:
       - linux
     goarch:
