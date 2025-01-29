@@ -6,7 +6,7 @@ before:
 
 env:
   - CGO_ENABLED=1
-  - CC=musl-gcc
+  # - CC=musl-gcc
 
 builds:
   - main: ./cmd/palomad
@@ -24,7 +24,7 @@ builds:
       - -X github.com/cosmos/cosmos-sdk/version.BuildTags=netgo
       - -X github.com/cometbft/cometbft/version.TMCoreSemVer={{ .Env.COMETBFT_VERSION }}
       - -linkmode=external
-      - -extldflags '--static -lm'
+      - -extldflags '-Wl,-z,muldefs --static -lm'
     goos:
       - linux
     goarch:
