@@ -11,9 +11,8 @@ builds:
     binary: palomad
     tags:
       - netgo
-      - muslc
-      # - gcc
-      # - ledger
+      - gcc
+      - ledger
     flags:
       - -mod=readonly
       - -trimpath
@@ -26,8 +25,7 @@ builds:
       - -X github.com/cosmos/cosmos-sdk/version.BuildTags=netgo
       - -X github.com/cometbft/cometbft/version.TMCoreSemVer={{ .Env.COMETBFT_VERSION }}
       - -linkmode=external
-      - -extldflags '-Wl,-z,muldefs --static'
-      # - -extldflags '-Wl,-z,muldefs --static -lm'
+      - -extldflags '-Wl,-z,muldefs --static -lm'
     goos:
       - linux
     goarch:
