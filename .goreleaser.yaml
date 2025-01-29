@@ -3,17 +3,18 @@
 before:
   hooks:
     - sudo wget https://github.com/CosmWasm/wasmvm/releases/download/{{ .Env.WASMVM_VERSION }}/libwasmvm_muslc.{{ .Env.KERNEL_MACHINE }}.a -O /lib/libwasmvm.{{ .Env.KERNEL_MACHINE }}.a
-    - sudo apt-get update && sudo apt-get install -y gcc musl musl-tools
+    - sudo apt-get update && sudo apt-get install -y musl-dev
+    # - sudo apt-get update && sudo apt-get install -y gcc musl musl-tools
 env:
   - CGO_ENABLED=1
-  - CC=musl-gcc
+  # - CC=musl-gcc
 
 builds:
   - main: ./cmd/palomad
     binary: palomad
     tags:
       - netgo
-      - gcc
+      - muslc
       - ledger
     ldflags:
       - -s -w
