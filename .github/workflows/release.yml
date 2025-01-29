@@ -25,15 +25,15 @@ jobs:
           go-version: '1.23.5'
       - name: Unshallow
         run: git fetch --prune --unshallow
-      - name: Extract WASMVM version
-        id: extract-wasmvm-version
+      - name: Extract versions
+        id: extract-version
         run: |
           WASMVM_VERSION=$(grep 'github.com/CosmWasm/wasmvm' go.mod | awk '{print $2}')
           COMETBFT_VERSION=$(grep 'github.com/cometbft/cometbft' go.mod | grep -v indirect | awk '{print $2}')
+          KERNEL_MACHINE=$(uname -m)
           echo "WASMVM_VERSION=$WASMVM_VERSION" >> $GITHUB_ENV
           echo "COMETBFT_VERSION=$COMETBFT_VERSION" >> $GITHUB_ENV
-      - name: Print WASMVM version
-        run: 'echo "Extracted WASMVM version: $COMETBFT_VERSION"'
+          echo "KERNEL_MACHINE=$KERNEL_MACHINE" >> $GITHUB_ENV
       - name: Create release
         uses: goreleaser/goreleaser-action@v5
         with:
@@ -42,3 +42,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WASMVM_VERSION: ${{ env.WASMVM_VERSION }}
           COMETBFT_VERSION: ${{ env.COMETBFT_VERSION }}
+          KERNEL_MACHINE: ${{ env.KERNEL_MACHINE }}
