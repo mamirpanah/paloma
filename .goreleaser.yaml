@@ -13,9 +13,6 @@ builds:
       - netgo
       - gcc
       - ledger
-    flags:
-      - -mod=readonly
-      - -trimpath
     ldflags:
       - -s -w
       - -X github.com/cosmos/cosmos-sdk/version.Name=paloma
