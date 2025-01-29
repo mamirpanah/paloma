@@ -5,6 +5,7 @@ before:
     - sudo wget https://github.com/CosmWasm/wasmvm/releases/download/{{ .Env.WASMVM_VERSION }}/libwasmvm_muslc.{{ .Env.KERNEL_MACHINE }}.a -O /lib/libwasmvm.{{ .Env.KERNEL_MACHINE }}.a
 env:
   - CGO_ENABLED=1
+  - CC=musl-gcc
 
 builds:
   - main: ./cmd/palomad
@@ -22,7 +23,8 @@ builds:
       - -X github.com/cosmos/cosmos-sdk/version.BuildTags=netgo
       - -X github.com/cometbft/cometbft/version.TMCoreSemVer={{ .Env.COMETBFT_VERSION }}
       - -linkmode=external
-      - -extldflags '-Wl,-z,muldefs --static -lm'
+      - -extldflags '-static -lm'
+      # - -extldflags '-Wl,-z,muldefs --static -lm'
     goos:
       - linux
     goarch:
